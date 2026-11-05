@@ -13,9 +13,10 @@ Prototype and demo of the Kemp Paper Command Center mockup. This repository is c
 - `06_customer_portal.sql` — customer portal
 - `07_production_log_bol.sql` — production log, order log, and bills of lading
 - `SETUP.md` — setup notes shipped with the export
+- `CUSTOMER-PORTAL.md` — customer portal guide for the screens in `index.html` and the rules in `06_customer_portal.sql`
 
 ## Incomplete setup prerequisites
 
 `SETUP.md` says to run `03_crm.sql` and `04_inventory_quickbooks.sql` after `01_schema.sql` and before `05_quoting.sql`. Those two files were not in this export and are not in this repository. `05_quoting.sql` alters tables those scripts are expected to create, so the database steps in `SETUP.md` cannot be finished from this repository alone.
 
-GitHub Pages is not enabled. Publishing these files does not create a Supabase project, invite users, or turn the demo on as a live site.
+GitHub Pages is enabled from branch `main`, root `/`, at https://richolson7.github.io/kemp-preview/. That address serves this folder, including `index.html`. The keys in `index.html` are still blank, so the site stays in demo mode. Publishing these files does not create a Supabase project or invite users.

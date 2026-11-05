@@ -72,10 +72,13 @@ Inventory and scanning, PO intake, optimizer orders, job jackets, pull sheet, sh
 - Customer-owned paper, moves and pulls never go to QuickBooks. The database marks them `skipped` automatically.
 
 ## Customer portal
-- Run `06_customer_portal.sql` in two steps: PART 1 alone, then PART 2.
-- Customers use the same web address. Invite them like staff (Authentication → Invite user), then in the Users tab set role **Customer** and pick their account.
-- A customer login can only ever see its own account: finished rolls, their paper in your racks, their orders, their releases and documents. The database enforces it, so even a hand-typed request can't reach another customer's data or anything internal.
-- Releases confirm themselves when the rolls are on hand and the time slot has room. Anything else lands in Ship & Receive → Customer releases as "Needs review" and raises a CRM task.
+Customers use the same web address as staff. The full guide is [CUSTOMER-PORTAL.md](CUSTOMER-PORTAL.md): what the four customer tabs show, how to run the SQL, invite steps, releases, standing releases, and what is still demo-only.
+
+Short version:
+- Run `06_customer_portal.sql` after 01–05, in two steps: PART 1 alone, then PART 2. `03_crm.sql` and `04_inventory_quickbooks.sql` are not in this repo. PART 2 needs `accounts` and `finished_rolls`, which those missing files were expected to create, so PART 2 cannot be finished from this repo alone.
+- Invite them like staff (Authentication → Invite user). In the Users tab set role **Customer**. The account link is `profiles.account_id`. The Users screen in this export has the Customer role and does not include an account dropdown.
+- A customer is meant to see only their own finished rolls, paper, orders, items, release windows, releases, standing releases, and account. `my_role()` returns null for customers, so staff policies do not apply to them.
+- A release confirms itself when on-hand rolls (`made` or `staged`) and the time slot both have room. Anything else is **Needs review** on Ship & Receive → Customer releases. The demo screen also lists a CRM task for that; the SQL file only sets the status.
 
 ## Production log, order log and BOLs
 - Run `07_production_log_bol.sql`.
